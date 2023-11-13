@@ -1,6 +1,6 @@
 # mackerel-plugin-switchbot
 
-A Mackerel plugin to collect SwitchBot metrics
+A Mackerel plugin to collect metrics from various SwitchBot devices.
 
 A list of supported devices can be found [here](https://github.com/SlashNephy/mackerel-plugin-switchbot/blob/master/metrics.go#L145).
 

@@ -17,7 +17,7 @@ var (
 	battery = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "battery",
-			Label: "Battery",
+			Label: "SwitchBot (Battery)",
 		},
 		Unit: mp.UnitPercentage,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -27,7 +27,7 @@ var (
 	temperature = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "temperature",
-			Label: "Temperature",
+			Label: "SwitchBot (Temperature)",
 		},
 		Unit: mp.UnitFloat,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -37,7 +37,7 @@ var (
 	humidity = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "humidity",
-			Label: "Humidity",
+			Label: "SwitchBot (Humidity)",
 		},
 		Unit: mp.UnitPercentage,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -47,7 +47,7 @@ var (
 	brightness = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "brightness",
-			Label: "Brightness",
+			Label: "SwitchBot (Brightness)",
 		},
 		Unit: mp.UnitPercentage,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -58,7 +58,7 @@ var (
 	colorTemperature = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "color_temperature",
-			Label: "Color Temperature",
+			Label: "SwitchBot (Color Temperature)",
 		},
 		Unit: mp.UnitInteger,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -68,7 +68,7 @@ var (
 	voltage = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "voltage",
-			Label: "Voltage",
+			Label: "SwitchBot (Voltage)",
 		},
 		Unit: mp.UnitFloat,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -78,7 +78,7 @@ var (
 	weight = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "weight",
-			Label: "Weight",
+			Label: "SwitchBot (Weight)",
 		},
 		Unit: mp.UnitFloat,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -88,7 +88,7 @@ var (
 	electricityOfDay = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "electricity_of_day",
-			Label: "Electricity of Day",
+			Label: "SwitchBot (Electricity of Day)",
 		},
 		Unit: mp.UnitInteger,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -98,7 +98,7 @@ var (
 	electricCurrent = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "electric_current",
-			Label: "Electric Current",
+			Label: "SwitchBot (Electric Current)",
 		},
 		Unit: mp.UnitFloat,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -108,7 +108,7 @@ var (
 	nebulizationEfficiency = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "nebulization_efficiency",
-			Label: "Nebulization Efficiency",
+			Label: "SwitchBot (Nebulization Efficiency)",
 		},
 		Unit: mp.UnitPercentage,
 		Value: func(status *switchbot.DeviceStatus) float64 {
@@ -118,7 +118,7 @@ var (
 	slidePosition = &metricSource{
 		Metrics: mp.Metrics{
 			Name:  "slide_position",
-			Label: "Slide Position",
+			Label: "SwitchBot (Slide Position)",
 		},
 		Unit: mp.UnitPercentage,
 		Value: func(status *switchbot.DeviceStatus) float64 {
