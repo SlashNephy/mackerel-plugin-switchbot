@@ -7,7 +7,7 @@ import (
 	"sync"
 
 	mp "github.com/mackerelio/go-mackerel-plugin"
-	"github.com/nasa9084/go-switchbot"
+	"github.com/nasa9084/go-switchbot/v3"
 	"github.com/samber/lo"
 	"golang.org/x/sync/errgroup"
 

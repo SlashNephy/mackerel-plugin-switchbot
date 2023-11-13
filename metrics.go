@@ -2,7 +2,7 @@ package main
 
 import (
 	mp "github.com/mackerelio/go-mackerel-plugin"
-	"github.com/nasa9084/go-switchbot"
+	"github.com/nasa9084/go-switchbot/v3"
 
 	switchbot2 "github.com/SlashNephy/mackerel-plugin-switchbot/switchbot"
 )
@@ -72,7 +72,7 @@ var (
 		},
 		Unit: mp.UnitFloat,
 		Value: func(status *switchbot.DeviceStatus) float64 {
-			return float64(status.Voltage)
+			return status.Voltage
 		},
 	}
 	weight = &metricSource{
@@ -82,7 +82,7 @@ var (
 		},
 		Unit: mp.UnitFloat,
 		Value: func(status *switchbot.DeviceStatus) float64 {
-			return float64(status.Weight)
+			return status.Weight
 		},
 	}
 	electricityOfDay = &metricSource{
@@ -160,6 +160,6 @@ var supportedMetrics = map[switchbot.PhysicalDeviceType][]*metricSource{
 	switchbot.RobotVacuumCleanerS1:     {battery},
 	switchbot.RobotVacuumCleanerS1Plus: {battery},
 	switchbot.Humidifier:               {humidity, temperature, nebulizationEfficiency},
-	switchbot2.BlindTilt:               {slidePosition},
+	switchbot.BlindTilt:                {slidePosition},
 	switchbot2.Hub2:                    {temperature, humidity}, // missing lightLevel
 }
