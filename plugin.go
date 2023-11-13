@@ -88,7 +88,7 @@ func (p *Plugin) FetchMetrics() (map[string]float64, error) {
 			defer mutex.Unlock()
 
 			for _, source := range sources {
-				key := fmt.Sprintf("%s.%s", device.ID, source.Name)
+				key := fmt.Sprintf("%s-%s", device.ID, source.Name)
 				metrics[key] = source.Value(&status)
 			}
 
