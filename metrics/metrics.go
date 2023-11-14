@@ -1,4 +1,4 @@
-package main
+package metrics
 
 import (
 	mp "github.com/mackerelio/go-mackerel-plugin"
@@ -7,15 +7,15 @@ import (
 	switchbot2 "github.com/SlashNephy/mackerel-plugin-switchbot/switchbot"
 )
 
-type metricSource struct {
-	mp.Metrics
+type MetricSource struct {
+	*mp.Metrics
 	Unit  string
 	Value func(status *switchbot.DeviceStatus) float64
 }
 
 var (
-	battery = &metricSource{
-		Metrics: mp.Metrics{
+	Battery = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "battery",
 			Label: "SwitchBot (Battery)",
 		},
@@ -24,8 +24,8 @@ var (
 			return float64(status.Battery)
 		},
 	}
-	temperature = &metricSource{
-		Metrics: mp.Metrics{
+	Temperature = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "temperature",
 			Label: "SwitchBot (Temperature)",
 		},
@@ -34,8 +34,8 @@ var (
 			return status.Temperature
 		},
 	}
-	humidity = &metricSource{
-		Metrics: mp.Metrics{
+	Humidity = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "humidity",
 			Label: "SwitchBot (Humidity)",
 		},
@@ -44,8 +44,8 @@ var (
 			return float64(status.Humidity)
 		},
 	}
-	brightness = &metricSource{
-		Metrics: mp.Metrics{
+	Brightness = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "brightness",
 			Label: "SwitchBot (Brightness)",
 		},
@@ -55,8 +55,8 @@ var (
 			return float64(value)
 		},
 	}
-	colorTemperature = &metricSource{
-		Metrics: mp.Metrics{
+	ColorTemperature = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "color_temperature",
 			Label: "SwitchBot (Color Temperature)",
 		},
@@ -65,8 +65,8 @@ var (
 			return float64(status.ColorTemperature)
 		},
 	}
-	voltage = &metricSource{
-		Metrics: mp.Metrics{
+	Voltage = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "voltage",
 			Label: "SwitchBot (Voltage)",
 		},
@@ -75,8 +75,8 @@ var (
 			return status.Voltage
 		},
 	}
-	weight = &metricSource{
-		Metrics: mp.Metrics{
+	weight = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "weight",
 			Label: "SwitchBot (Weight)",
 		},
@@ -85,8 +85,8 @@ var (
 			return status.Weight
 		},
 	}
-	electricityOfDay = &metricSource{
-		Metrics: mp.Metrics{
+	ElectricityOfDay = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "electricity_of_day",
 			Label: "SwitchBot (Electricity of Day)",
 		},
@@ -95,8 +95,8 @@ var (
 			return float64(status.ElectricityOfDay)
 		},
 	}
-	electricCurrent = &metricSource{
-		Metrics: mp.Metrics{
+	ElectricCurrent = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "electric_current",
 			Label: "SwitchBot (Electric Current)",
 		},
@@ -105,8 +105,8 @@ var (
 			return status.ElectricCurrent
 		},
 	}
-	nebulizationEfficiency = &metricSource{
-		Metrics: mp.Metrics{
+	NebulizationEfficiency = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "nebulization_efficiency",
 			Label: "SwitchBot (Nebulization Efficiency)",
 		},
@@ -115,8 +115,8 @@ var (
 			return float64(status.NebulizationEfficiency)
 		},
 	}
-	slidePosition = &metricSource{
-		Metrics: mp.Metrics{
+	SlidePosition = &MetricSource{
+		Metrics: &mp.Metrics{
 			Name:  "slide_position",
 			Label: "SwitchBot (Slide Position)",
 		},
@@ -127,39 +127,39 @@ var (
 	}
 )
 
-var allMetricSources = []*metricSource{
-	battery,
-	temperature,
-	humidity,
-	brightness,
-	colorTemperature,
-	voltage,
+var AllMetrics = []*MetricSource{
+	Battery,
+	Temperature,
+	Humidity,
+	Brightness,
+	ColorTemperature,
+	Voltage,
 	weight,
-	electricityOfDay,
-	electricCurrent,
-	nebulizationEfficiency,
-	slidePosition,
+	ElectricityOfDay,
+	ElectricCurrent,
+	NebulizationEfficiency,
+	SlidePosition,
 }
 
-// https://github.com/OpenWonderLabs/SwitchBotAPI/blob/main/README.md#get-device-status
-var supportedMetrics = map[switchbot.PhysicalDeviceType][]*metricSource{
-	switchbot.Bot:                      {battery},
-	switchbot.Curtain:                  {battery},
-	switchbot.Meter:                    {temperature, battery, humidity},
-	switchbot.MeterPlus:                {battery, temperature, humidity},
-	switchbot2.OutdoorMeter:            {battery, temperature, humidity},
-	switchbot2.SmartLock:               {battery},
-	switchbot.MotionSensor:             {battery},
-	switchbot.ContactSensor:            {battery},
-	switchbot.CeilingLight:             {brightness, colorTemperature},
-	switchbot.CeilingLightPro:          {brightness, colorTemperature},
-	switchbot.PlugMiniUS:               {voltage, weight, electricityOfDay, electricCurrent},
-	switchbot.PlugMiniJP:               {voltage, weight, electricityOfDay, electricCurrent},
-	switchbot.StripLight:               {brightness},
-	switchbot.ColorBulb:                {brightness, colorTemperature},
-	switchbot.RobotVacuumCleanerS1:     {battery},
-	switchbot.RobotVacuumCleanerS1Plus: {battery},
-	switchbot.Humidifier:               {humidity, temperature, nebulizationEfficiency},
-	switchbot.BlindTilt:                {slidePosition},
-	switchbot2.Hub2:                    {temperature, humidity}, // missing lightLevel
+var SupportedMetrics = map[switchbot.PhysicalDeviceType][]*MetricSource{
+	// https://github.com/OpenWonderLabs/SwitchBotAPI/blob/main/README.md#get-device-status
+	switchbot.Bot:                      {Battery},
+	switchbot.Curtain:                  {Battery},
+	switchbot.Meter:                    {Temperature, Battery, Humidity},
+	switchbot.MeterPlus:                {Battery, Temperature, Humidity},
+	switchbot2.OutdoorMeter:            {Battery, Temperature, Humidity},
+	switchbot2.SmartLock:               {Battery},
+	switchbot.MotionSensor:             {Battery},
+	switchbot.ContactSensor:            {Battery},
+	switchbot.CeilingLight:             {Brightness, ColorTemperature},
+	switchbot.CeilingLightPro:          {Brightness, ColorTemperature},
+	switchbot.PlugMiniUS:               {Voltage, weight, ElectricityOfDay, ElectricCurrent},
+	switchbot.PlugMiniJP:               {Voltage, weight, ElectricityOfDay, ElectricCurrent},
+	switchbot.StripLight:               {Brightness},
+	switchbot.ColorBulb:                {Brightness, ColorTemperature},
+	switchbot.RobotVacuumCleanerS1:     {Battery},
+	switchbot.RobotVacuumCleanerS1Plus: {Battery},
+	switchbot.Humidifier:               {Humidity, Temperature, NebulizationEfficiency},
+	switchbot.BlindTilt:                {SlidePosition},
+	switchbot2.Hub2:                    {Temperature, Humidity}, // missing lightLevel
 }

@@ -12,6 +12,7 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	"github.com/SlashNephy/mackerel-plugin-switchbot/config"
+	"github.com/SlashNephy/mackerel-plugin-switchbot/metrics"
 )
 
 type Plugin struct {
@@ -32,9 +33,9 @@ func (p *Plugin) GraphDefinition() map[string]mp.Graphs {
 	}
 
 	definition := map[string]mp.Graphs{}
-	for _, source := range allMetricSources {
+	for _, source := range metrics.AllMetrics {
 		d := lo.Filter(devices, func(device *switchbot.Device, _ int) bool {
-			sources, ok := supportedMetrics[device.Type]
+			sources, ok := metrics.SupportedMetrics[device.Type]
 			return ok && slices.Contains(sources, source)
 		})
 		if len(d) == 0 {
@@ -68,11 +69,11 @@ func (p *Plugin) FetchMetrics() (map[string]float64, error) {
 		return nil, err
 	}
 
-	metrics := map[string]float64{}
+	results := map[string]float64{}
 	var mutex sync.Mutex
 	eg, egctx := errgroup.WithContext(p.ctx)
 	for _, device := range devices {
-		sources, ok := supportedMetrics[device.Type]
+		sources, ok := metrics.SupportedMetrics[device.Type]
 		if !ok {
 			continue
 		}
@@ -89,7 +90,7 @@ func (p *Plugin) FetchMetrics() (map[string]float64, error) {
 
 			for _, source := range sources {
 				key := fmt.Sprintf("%s-%s", device.ID, source.Name)
-				metrics[key] = source.Value(&status)
+				results[key] = source.Value(&status)
 			}
 
 			return nil
@@ -99,7 +100,7 @@ func (p *Plugin) FetchMetrics() (map[string]float64, error) {
 		return nil, err
 	}
 
-	return metrics, nil
+	return results, nil
 }
 
 func (p *Plugin) getDevices() ([]*switchbot.Device, error) {
