@@ -2,7 +2,7 @@
 
 A Mackerel plugin to collect metrics from various SwitchBot devices.
 
-A list of supported devices can be found [here](https://github.com/SlashNephy/mackerel-plugin-switchbot/blob/master/metrics.go#L145).
+A list of supported devices can be found [here](https://github.com/SlashNephy/mackerel-plugin-switchbot/blob/bc21153161af32cef22be649879691ace2d58d7b/metrics/metrics.go#L144).
 
 ## Example Metrics
 
