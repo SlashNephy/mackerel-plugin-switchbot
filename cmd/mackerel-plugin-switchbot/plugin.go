@@ -112,6 +112,10 @@ func (p *Plugin) getDevices() ([]*switchbot.Device, error) {
 		}
 
 		for _, device := range devices {
+			if len(p.config.FilterDevices) > 0 && !slices.Contains(p.config.FilterDevices, device.ID) {
+				continue
+			}
+
 			device := device
 			p.devices = append(p.devices, &device)
 		}

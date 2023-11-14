@@ -7,10 +7,11 @@ import (
 )
 
 type Config struct {
-	SwitchBotOpenToken string `long:"open-token" description:"SwitchBot Open Token" required:"true" env:"SWITCHBOT_OPEN_TOKEN"`
-	SwitchBotSecretKey string `long:"secret-key" description:"SwitchBot Secret Key" required:"true" env:"SWITCHBOT_SECRET_KEY"`
-	Prefix             string `long:"prefix" description:"Metric key prefix" default:"switchbot" env:"PREFIX"`
-	Tempfile           string `long:"tempfile" description:"Temp filename" env:"TEMPFILE"`
+	SwitchBotOpenToken string   `long:"open-token" description:"SwitchBot Open Token" required:"true" env:"SWITCHBOT_OPEN_TOKEN"`
+	SwitchBotSecretKey string   `long:"secret-key" description:"SwitchBot Secret Key" required:"true" env:"SWITCHBOT_SECRET_KEY"`
+	FilterDevices      []string `long:"filter-devices" description:"Filter devices by ID" env:"FILTER_DEVICES"`
+	Prefix             string   `long:"prefix" description:"Metric key prefix" default:"switchbot" env:"PREFIX"`
+	Tempfile           string   `long:"tempfile" description:"Temp filename" env:"TEMPFILE"`
 }
 
 func LoadConfig() (*Config, error) {
