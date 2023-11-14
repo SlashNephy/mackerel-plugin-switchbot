@@ -18,7 +18,7 @@ jobs:
     permissions:
       contents: 'read'
     with:
-      task: 'build'
+      command: 'make build'
 
   lint:
     uses: SlashNephy/.github/.github/workflows/go-lint.yml@master
