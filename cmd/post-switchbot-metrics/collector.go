@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/SlashNephy/mackerel-plugin-switchbot/metrics"
 	"slices"
 	"strings"
 	"time"
@@ -13,6 +12,7 @@ import (
 	"github.com/samber/lo"
 
 	"github.com/SlashNephy/mackerel-plugin-switchbot/config"
+	"github.com/SlashNephy/mackerel-plugin-switchbot/metrics"
 )
 
 type Collector struct {
@@ -44,13 +44,13 @@ func (c *Collector) fetchMetrics(ctx context.Context) ([]*mackerel.MetricValue, 
 
 	var values []*mackerel.MetricValue
 	for key, value := range metrics {
-		_, name, ok := strings.Cut(key, "-")
+		deviceID, name, ok := strings.Cut(key, "-")
 		if !ok {
 			return nil, fmt.Errorf("invalid metric key: %s", key)
 		}
 
 		values = append(values, &mackerel.MetricValue{
-			Name:  fmt.Sprintf("%s.%s.%s", c.config.Prefix, name, key),
+			Name:  fmt.Sprintf("%s.%s.%s", c.config.Prefix, name, deviceID),
 			Value: value,
 			Time:  now,
 		})
