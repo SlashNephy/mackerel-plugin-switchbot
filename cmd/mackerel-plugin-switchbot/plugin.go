@@ -3,16 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"slices"
-	"sync"
-
+	"github.com/SlashNephy/mackerel-plugin-switchbot/config"
+	"github.com/SlashNephy/mackerel-plugin-switchbot/metrics"
 	mp "github.com/mackerelio/go-mackerel-plugin"
 	"github.com/nasa9084/go-switchbot/v3"
 	"github.com/samber/lo"
-	"golang.org/x/sync/errgroup"
-
-	"github.com/SlashNephy/mackerel-plugin-switchbot/config"
-	"github.com/SlashNephy/mackerel-plugin-switchbot/metrics"
+	"slices"
 )
 
 type Plugin struct {
@@ -69,38 +65,7 @@ func (p *Plugin) FetchMetrics() (map[string]float64, error) {
 		return nil, err
 	}
 
-	results := map[string]float64{}
-	var mutex sync.Mutex
-	eg, egctx := errgroup.WithContext(p.ctx)
-	for _, device := range devices {
-		sources, ok := metrics.SupportedMetrics[device.Type]
-		if !ok {
-			continue
-		}
-
-		device := device
-		eg.Go(func() error {
-			status, err := p.client.Device().Status(egctx, device.ID)
-			if err != nil {
-				return err
-			}
-
-			mutex.Lock()
-			defer mutex.Unlock()
-
-			for _, source := range sources {
-				key := fmt.Sprintf("%s-%s", device.ID, source.Name)
-				results[key] = source.Value(&status)
-			}
-
-			return nil
-		})
-	}
-	if err = eg.Wait(); err != nil {
-		return nil, err
-	}
-
-	return results, nil
+	return metrics.FetchMetrics(p.ctx, p.client, devices)
 }
 
 func (p *Plugin) getDevices() ([]*switchbot.Device, error) {
