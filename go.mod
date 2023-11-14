@@ -3,7 +3,6 @@ module github.com/SlashNephy/mackerel-plugin-switchbot
 go 1.21
 
 require (
-	github.com/caarlos0/env/v10 v10.0.0
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/joho/godotenv v1.5.1
 	github.com/mackerelio/go-mackerel-plugin v0.1.4
