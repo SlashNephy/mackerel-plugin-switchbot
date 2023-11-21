@@ -21,3 +21,6 @@ jobs:
     with:
       image-name: ghcr.io/slashnephy/post-switchbot-metrics
       image-platforms: linux/amd64,linux/arm64
+      dispatch-update-image-digest: true
+    secrets:
+      dispatch-github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
