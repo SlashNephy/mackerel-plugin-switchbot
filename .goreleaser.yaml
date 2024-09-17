@@ -1,7 +1,11 @@
+version: 2
+
 builds:
-  - binary: mackerel-plugin-switchbot
+  - main: ./cmd/mackerel-plugin-switchbot
     goos:
       - linux
+      - windows
+      - darwin
     goarch:
       - amd64
       - arm64
