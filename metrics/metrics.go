@@ -55,6 +55,24 @@ var (
 			return float64(value)
 		},
 	}
+	AmbientBrightness = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "ambient_brightness",
+			Label: "SwitchBot (Ambient Brightness)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			value, _ := status.Brightness.AmbientBrightness()
+			switch value {
+			case switchbot.AmbientBrightnessDim:
+				return 0
+			case switchbot.AmbientBrightnessBright:
+				return 1
+			default:
+				return 0
+			}
+		},
+	}
 	ColorTemperature = &MetricSource{
 		Metrics: &mp.Metrics{
 			Name:  "color_temperature",
@@ -75,7 +93,7 @@ var (
 			return status.Voltage
 		},
 	}
-	weight = &MetricSource{
+	Weight = &MetricSource{
 		Metrics: &mp.Metrics{
 			Name:  "weight",
 			Label: "SwitchBot (Weight)",
@@ -125,6 +143,155 @@ var (
 			return float64(status.SlidePosition)
 		},
 	}
+	Calibrate = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "calibrate",
+			Label: "SwitchBot (Calibrate)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			if status.IsCalibrated {
+				return 1
+			}
+
+			return 0
+		},
+	}
+	Group = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "group",
+			Label: "SwitchBot (Group)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			if status.IsGrouped {
+				return 1
+			}
+
+			return 0
+		},
+	}
+	Moving = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "moving",
+			Label: "SwitchBot (Moving)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			if status.IsMoving {
+				return 1
+			}
+
+			return 0
+		},
+	}
+	MoveDetected = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "move_detected",
+			Label: "SwitchBot (Move Detected)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			if status.IsMoveDetected {
+				return 1
+			}
+
+			return 0
+		},
+	}
+	OnlineStatus = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "online_status",
+			Label: "SwitchBot (Online Status)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			switch status.OnlineStatus {
+			case switchbot.CleanerOffline:
+				return 0
+			case switchbot.CleanerOnline:
+				return 1
+			default:
+				return 0
+			}
+		},
+	}
+	Auto = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "auto",
+			Label: "SwitchBot (Auto)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			if status.IsAuto {
+				return 1
+			}
+
+			return 0
+		},
+	}
+	ChildLock = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "child_lock",
+			Label: "SwitchBot (Child Lock)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			if status.IsChildLock {
+				return 1
+			}
+
+			return 0
+		},
+	}
+	Sound = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "sound",
+			Label: "SwitchBot (Sound)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			if status.IsSound {
+				return 1
+			}
+
+			return 0
+		},
+	}
+	LackWater = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "lack_water",
+			Label: "SwitchBot (Lack Water)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			if status.IsLackWater {
+				return 1
+			}
+
+			return 0
+		},
+	}
+	LightLevel = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "light_level",
+			Label: "SwitchBot (Light Level)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			return float64(status.LightLevel)
+		},
+	}
+	FanSpeed = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "fan_speed",
+			Label: "SwitchBot (Fan Speed)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			return float64(status.FanSpeed)
+		},
+	}
 )
 
 var AllMetrics = []*MetricSource{
@@ -134,32 +301,54 @@ var AllMetrics = []*MetricSource{
 	Brightness,
 	ColorTemperature,
 	Voltage,
-	weight,
+	Weight,
 	ElectricityOfDay,
 	ElectricCurrent,
 	NebulizationEfficiency,
 	SlidePosition,
+	Calibrate,
+	Group,
+	Moving,
+	MoveDetected,
+	AmbientBrightness,
+	OnlineStatus,
+	Auto,
+	ChildLock,
+	Sound,
+	LackWater,
+	LightLevel,
+	FanSpeed,
 }
 
 var SupportedMetrics = map[switchbot.PhysicalDeviceType][]*MetricSource{
-	// https://github.com/OpenWonderLabs/SwitchBotAPI/blob/main/README.md#get-device-status
-	switchbot.Bot:                      {Battery},
-	switchbot.Curtain:                  {Battery},
-	switchbot.Meter:                    {Temperature, Battery, Humidity},
-	switchbot.MeterPlus:                {Battery, Temperature, Humidity},
-	switchbot2.OutdoorMeter:            {Battery, Temperature, Humidity},
-	switchbot2.SmartLock:               {Battery},
-	switchbot.MotionSensor:             {Battery},
-	switchbot.ContactSensor:            {Battery},
-	switchbot.CeilingLight:             {Brightness, ColorTemperature},
-	switchbot.CeilingLightPro:          {Brightness, ColorTemperature},
-	switchbot.PlugMiniUS:               {Voltage, weight, ElectricityOfDay, ElectricCurrent},
-	switchbot.PlugMiniJP:               {Voltage, weight, ElectricityOfDay, ElectricCurrent},
-	switchbot.StripLight:               {Brightness},
-	switchbot.ColorBulb:                {Brightness, ColorTemperature},
-	switchbot.RobotVacuumCleanerS1:     {Battery},
-	switchbot.RobotVacuumCleanerS1Plus: {Battery},
-	switchbot.Humidifier:               {Humidity, Temperature, NebulizationEfficiency},
-	switchbot.BlindTilt:                {SlidePosition},
-	switchbot2.Hub2:                    {Temperature, Humidity}, // missing lightLevel
+	// https://github.com/OpenWonderLabs/SwitchBotAPI/blob/main/README.md#responses-1
+	switchbot.Bot:                        {Battery},
+	switchbot.Curtain:                    {Calibrate, Group, Moving, Battery, SlidePosition},
+	switchbot2.Curtain3:                  {Calibrate, Group, Moving, Battery, SlidePosition},
+	switchbot.Meter:                      {Temperature, Battery, Humidity},
+	switchbot.MeterPlus:                  {Battery, Temperature, Humidity},
+	switchbot.WoIOSensor:                 {Battery, Temperature, Humidity},
+	switchbot.Lock:                       {Battery /* lockState, doorState */, Calibrate},
+	switchbot2.LockPro:                   {Battery /* lockState, doorState */, Calibrate},
+	switchbot.KeyPad:                     {},
+	switchbot.KeyPadTouch:                {},
+	switchbot.MotionSensor:               {Battery, MoveDetected, AmbientBrightness},
+	switchbot.ContactSensor:              {Battery, MoveDetected /* openState */, AmbientBrightness},
+	switchbot2.WaterLeakDetector:         {Battery /* status */},
+	switchbot.CeilingLight:               {Brightness, ColorTemperature},
+	switchbot.CeilingLightPro:            {Brightness, ColorTemperature},
+	switchbot.PlugMiniUS:                 {Voltage, Weight, ElectricityOfDay, ElectricCurrent},
+	switchbot.PlugMiniJP:                 {Voltage, Weight, ElectricityOfDay, ElectricCurrent},
+	switchbot.Plug:                       {},
+	switchbot.StripLight:                 {Brightness},
+	switchbot.ColorBulb:                  {Brightness, ColorTemperature},
+	switchbot.RobotVacuumCleanerS1:       { /* workingStatus */ OnlineStatus, Battery},
+	switchbot.RobotVacuumCleanerS1Plus:   { /* workingStatus */ OnlineStatus, Battery},
+	switchbot2.MiniRobotVacuumK10Plus:    { /* workingStatus */ OnlineStatus, Battery},
+	switchbot2.MiniRobotVacuumK10PlusPro: { /* workingStatus */ OnlineStatus, Battery},
+	switchbot2.FloorCleaningRobotS10:     { /* workingStatus */ OnlineStatus, Battery /* waterBaseBatterym, taskType */},
+	switchbot.Humidifier:                 {Humidity, Temperature, NebulizationEfficiency, Auto, ChildLock, Sound, LackWater},
+	switchbot.BlindTilt:                  {Calibrate, Group, Moving, SlidePosition},
+	switchbot.Hub2:                       {Temperature, LightLevel, Humidity},
+	switchbot2.BatteryCirculatorFan:      {Battery /* nightStatus */, FanSpeed},
 }

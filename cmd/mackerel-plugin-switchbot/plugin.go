@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"slices"
+
 	"github.com/SlashNephy/mackerel-plugin-switchbot/config"
 	"github.com/SlashNephy/mackerel-plugin-switchbot/metrics"
 	mp "github.com/mackerelio/go-mackerel-plugin"
 	"github.com/nasa9084/go-switchbot/v3"
 	"github.com/samber/lo"
-	"slices"
 )
 
 type Plugin struct {
