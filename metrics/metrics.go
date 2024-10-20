@@ -292,6 +292,16 @@ var (
 			return float64(status.FanSpeed)
 		},
 	}
+	CO2 = &MetricSource{
+		Metrics: &mp.Metrics{
+			Name:  "co2",
+			Label: "SwitchBot (CO2)",
+		},
+		Unit: mp.UnitInteger,
+		Value: func(status *switchbot.DeviceStatus) float64 {
+			return float64(status.CO2)
+		},
+	}
 )
 
 var AllMetrics = []*MetricSource{
@@ -318,6 +328,7 @@ var AllMetrics = []*MetricSource{
 	LackWater,
 	LightLevel,
 	FanSpeed,
+	CO2,
 }
 
 var SupportedMetrics = map[switchbot.PhysicalDeviceType][]*MetricSource{
@@ -327,6 +338,7 @@ var SupportedMetrics = map[switchbot.PhysicalDeviceType][]*MetricSource{
 	switchbot2.Curtain3:                  {Calibrate, Group, Moving, Battery, SlidePosition},
 	switchbot.Meter:                      {Temperature, Battery, Humidity},
 	switchbot.MeterPlus:                  {Battery, Temperature, Humidity},
+	switchbot.MeterPro:                   {Battery, Temperature, Humidity, CO2},
 	switchbot.WoIOSensor:                 {Battery, Temperature, Humidity},
 	switchbot.Lock:                       {Battery /* lockState, doorState */, Calibrate},
 	switchbot2.LockPro:                   {Battery /* lockState, doorState */, Calibrate},
