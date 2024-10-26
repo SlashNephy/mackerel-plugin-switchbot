@@ -3,6 +3,7 @@ package metrics
 import (
 	mp "github.com/mackerelio/go-mackerel-plugin"
 	"github.com/nasa9084/go-switchbot/v3"
+	"github.com/samber/lo"
 )
 
 type MetricSource struct {
@@ -302,33 +303,6 @@ var (
 	}
 )
 
-var AllMetrics = []*MetricSource{
-	Battery,
-	Temperature,
-	Humidity,
-	Brightness,
-	ColorTemperature,
-	Voltage,
-	Weight,
-	ElectricityOfDay,
-	ElectricCurrent,
-	NebulizationEfficiency,
-	SlidePosition,
-	Calibrate,
-	Group,
-	Moving,
-	MoveDetected,
-	AmbientBrightness,
-	OnlineStatus,
-	Auto,
-	ChildLock,
-	Sound,
-	LackWater,
-	LightLevel,
-	FanSpeed,
-	CO2,
-}
-
 var SupportedMetrics = map[switchbot.PhysicalDeviceType][]*MetricSource{
 	// https://github.com/OpenWonderLabs/SwitchBotAPI/blob/main/README.md#responses-1
 	switchbot.Bot:                      {Battery},
@@ -361,4 +335,17 @@ var SupportedMetrics = map[switchbot.PhysicalDeviceType][]*MetricSource{
 	switchbot.BlindTilt:                {Calibrate, Group, Moving, SlidePosition},
 	switchbot.Hub2:                     {Temperature, LightLevel, Humidity},
 	"Battery Circulator Fan":           {Battery /* nightStatus */, FanSpeed},
+}
+
+var AllMetrics []*MetricSource
+
+func init() {
+	metricByName := map[string]*MetricSource{}
+	for _, sources := range SupportedMetrics {
+		for _, source := range sources {
+			metricByName[source.Name] = source
+		}
+	}
+
+	AllMetrics = lo.Values(metricByName)
 }
