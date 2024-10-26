@@ -3,8 +3,6 @@ package metrics
 import (
 	mp "github.com/mackerelio/go-mackerel-plugin"
 	"github.com/nasa9084/go-switchbot/v3"
-
-	switchbot2 "github.com/SlashNephy/mackerel-plugin-switchbot/switchbot"
 )
 
 type MetricSource struct {
@@ -333,34 +331,34 @@ var AllMetrics = []*MetricSource{
 
 var SupportedMetrics = map[switchbot.PhysicalDeviceType][]*MetricSource{
 	// https://github.com/OpenWonderLabs/SwitchBotAPI/blob/main/README.md#responses-1
-	switchbot.Bot:                        {Battery},
-	switchbot.Curtain:                    {Calibrate, Group, Moving, Battery, SlidePosition},
-	switchbot2.Curtain3:                  {Calibrate, Group, Moving, Battery, SlidePosition},
-	switchbot.Meter:                      {Temperature, Battery, Humidity},
-	switchbot.MeterPlus:                  {Battery, Temperature, Humidity},
-	switchbot.MeterPro:                   {Battery, Temperature, Humidity, CO2},
-	switchbot.WoIOSensor:                 {Battery, Temperature, Humidity},
-	switchbot.Lock:                       {Battery /* lockState, doorState */, Calibrate},
-	switchbot2.LockPro:                   {Battery /* lockState, doorState */, Calibrate},
-	switchbot.KeyPad:                     {},
-	switchbot.KeyPadTouch:                {},
-	switchbot.MotionSensor:               {Battery, MoveDetected, AmbientBrightness},
-	switchbot.ContactSensor:              {Battery, MoveDetected /* openState */, AmbientBrightness},
-	switchbot2.WaterLeakDetector:         {Battery /* status */},
-	switchbot.CeilingLight:               {Brightness, ColorTemperature},
-	switchbot.CeilingLightPro:            {Brightness, ColorTemperature},
-	switchbot.PlugMiniUS:                 {Voltage, Weight, ElectricityOfDay, ElectricCurrent},
-	switchbot.PlugMiniJP:                 {Voltage, Weight, ElectricityOfDay, ElectricCurrent},
-	switchbot.Plug:                       {},
-	switchbot.StripLight:                 {Brightness},
-	switchbot.ColorBulb:                  {Brightness, ColorTemperature},
-	switchbot.RobotVacuumCleanerS1:       { /* workingStatus */ OnlineStatus, Battery},
-	switchbot.RobotVacuumCleanerS1Plus:   { /* workingStatus */ OnlineStatus, Battery},
-	switchbot2.MiniRobotVacuumK10Plus:    { /* workingStatus */ OnlineStatus, Battery},
-	switchbot2.MiniRobotVacuumK10PlusPro: { /* workingStatus */ OnlineStatus, Battery},
-	switchbot2.FloorCleaningRobotS10:     { /* workingStatus */ OnlineStatus, Battery /* waterBaseBatterym, taskType */},
-	switchbot.Humidifier:                 {Humidity, Temperature, NebulizationEfficiency, Auto, ChildLock, Sound, LackWater},
-	switchbot.BlindTilt:                  {Calibrate, Group, Moving, SlidePosition},
-	switchbot.Hub2:                       {Temperature, LightLevel, Humidity},
-	switchbot2.BatteryCirculatorFan:      {Battery /* nightStatus */, FanSpeed},
+	switchbot.Bot:                      {Battery},
+	switchbot.Curtain:                  {Calibrate, Group, Moving, Battery, SlidePosition},
+	"Curtain3":                         {Calibrate, Group, Moving, Battery, SlidePosition},
+	switchbot.Meter:                    {Temperature, Battery, Humidity},
+	switchbot.MeterPlus:                {Battery, Temperature, Humidity},
+	"MeterPro(CO2)":                    {Battery, Temperature, Humidity, CO2},
+	switchbot.WoIOSensor:               {Battery, Temperature, Humidity},
+	switchbot.Lock:                     {Battery /* lockState, doorState */, Calibrate},
+	"Smart Lock Pro":                   {Battery /* lockState, doorState */, Calibrate},
+	switchbot.KeyPad:                   {},
+	switchbot.KeyPadTouch:              {},
+	switchbot.MotionSensor:             {Battery, MoveDetected, AmbientBrightness},
+	switchbot.ContactSensor:            {Battery, MoveDetected /* openState */, AmbientBrightness},
+	"Water Detector":                   {Battery /* status */},
+	switchbot.CeilingLight:             {Brightness, ColorTemperature},
+	switchbot.CeilingLightPro:          {Brightness, ColorTemperature},
+	switchbot.PlugMiniUS:               {Voltage, Weight, ElectricityOfDay, ElectricCurrent},
+	switchbot.PlugMiniJP:               {Voltage, Weight, ElectricityOfDay, ElectricCurrent},
+	switchbot.Plug:                     {},
+	switchbot.StripLight:               {Brightness},
+	switchbot.ColorBulb:                {Brightness, ColorTemperature},
+	switchbot.RobotVacuumCleanerS1:     { /* workingStatus */ OnlineStatus, Battery},
+	switchbot.RobotVacuumCleanerS1Plus: { /* workingStatus */ OnlineStatus, Battery},
+	"K10+":                             { /* workingStatus */ OnlineStatus, Battery},
+	"K10+ Pro":                         { /* workingStatus */ OnlineStatus, Battery},
+	"Robot Vacuum Cleaner S10":         { /* workingStatus */ OnlineStatus, Battery /* waterBaseBatterym, taskType */},
+	switchbot.Humidifier:               {Humidity, Temperature, NebulizationEfficiency, Auto, ChildLock, Sound, LackWater},
+	switchbot.BlindTilt:                {Calibrate, Group, Moving, SlidePosition},
+	switchbot.Hub2:                     {Temperature, LightLevel, Humidity},
+	"Battery Circulator Fan":           {Battery /* nightStatus */, FanSpeed},
 }
