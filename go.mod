@@ -9,7 +9,7 @@ require (
 	github.com/mackerelio/mackerel-client-go v0.34.0
 	github.com/nasa9084/go-switchbot/v3 v3.2.0
 	github.com/samber/lo v1.47.0
-	golang.org/x/sync v0.8.0
+	golang.org/x/sync v0.9.0
 )
 
 require (
