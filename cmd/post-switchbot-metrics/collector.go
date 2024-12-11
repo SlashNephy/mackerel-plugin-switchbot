@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/mackerelio/mackerel-client-go"
-	"github.com/nasa9084/go-switchbot/v3"
+	"github.com/nasa9084/go-switchbot/v4"
 	"github.com/samber/lo"
 
 	"github.com/SlashNephy/mackerel-plugin-switchbot/config"
