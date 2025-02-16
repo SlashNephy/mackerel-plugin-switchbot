@@ -2,7 +2,7 @@ package metrics
 
 import (
 	mp "github.com/mackerelio/go-mackerel-plugin"
-	"github.com/nasa9084/go-switchbot/v3"
+	"github.com/nasa9084/go-switchbot/v4"
 	"github.com/samber/lo"
 )
 
