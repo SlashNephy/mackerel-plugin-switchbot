@@ -10,7 +10,7 @@ require (
 	github.com/mackerelio/go-mackerel-plugin v0.1.5
 	github.com/mackerelio/mackerel-client-go v0.36.0
 	github.com/nasa9084/go-switchbot/v3 v3.2.0
-	github.com/samber/lo v1.49.1
+	github.com/samber/lo v1.50.0
 	golang.org/x/sync v0.13.0
 )
 
@@ -19,5 +19,5 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/mackerelio/golib v1.2.1 // indirect
 	golang.org/x/sys v0.25.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/text v0.22.0 // indirect
 )
