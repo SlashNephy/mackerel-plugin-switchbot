@@ -11,7 +11,7 @@ require (
 	github.com/mackerelio/mackerel-client-go v0.37.0
 	github.com/nasa9084/go-switchbot/v3 v3.2.0
 	github.com/samber/lo v1.50.0
-	golang.org/x/sync v0.14.0
+	golang.org/x/sync v0.15.0
 )
 
 require (
