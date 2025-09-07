@@ -1,6 +1,6 @@
 module github.com/SlashNephy/mackerel-plugin-switchbot
 
-go 1.23.0
+go 1.24.0
 
 toolchain go1.25.1
 
@@ -11,7 +11,7 @@ require (
 	github.com/mackerelio/mackerel-client-go v0.37.3
 	github.com/nasa9084/go-switchbot/v3 v3.2.0
 	github.com/samber/lo v1.51.0
-	golang.org/x/sync v0.16.0
+	golang.org/x/sync v0.17.0
 )
 
 require (
