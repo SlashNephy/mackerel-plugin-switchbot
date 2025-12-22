@@ -9,7 +9,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/mackerelio/go-mackerel-plugin v0.1.5
 	github.com/mackerelio/mackerel-client-go v0.39.0
-	github.com/nasa9084/go-switchbot/v3 v3.2.0
+	github.com/nasa9084/go-switchbot/v5 v5.3.0
 	github.com/samber/lo v1.52.0
 	golang.org/x/sync v0.19.0
 )
