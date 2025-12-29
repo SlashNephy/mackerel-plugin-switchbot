@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/nasa9084/go-switchbot/v3"
+	"github.com/nasa9084/go-switchbot/v5"
 	"golang.org/x/sync/errgroup"
 )
 
