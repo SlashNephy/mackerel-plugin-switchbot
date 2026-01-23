@@ -12,8 +12,8 @@ github.com/mackerelio/go-mackerel-plugin v0.1.5 h1:8k0xrZd1bllGKfki/ndCdQ1Pe/l8M
 github.com/mackerelio/go-mackerel-plugin v0.1.5/go.mod h1:c1Y27qQnuMBK6QqLrmW5OcDqMLrUGbPo2KEjZd37DH4=
 github.com/mackerelio/golib v1.2.1 h1:SDcDn6Jw3p9bi1N0bg1Z/ilG5qcBB23qL8xNwrU0gg4=
 github.com/mackerelio/golib v1.2.1/go.mod h1:b8ZaapsHGH1FlEJlCqfD98CqafLeyMevyATDlID2BsM=
-github.com/mackerelio/mackerel-client-go v0.39.0 h1:LOUCThT8i9O+9SRo3fieKJUlbAmH7JHhiv1wSxlrh2M=
-github.com/mackerelio/mackerel-client-go v0.39.0/go.mod h1:hIMlFC/wuvBBQEjh0plBLUUTT/bcjmiwoPMxTucVFYk=
+github.com/mackerelio/mackerel-client-go v0.40.0 h1:PYjQg5WSzDqZUlasOQuMaUfS0JcNpw526tC0TauGvA0=
+github.com/mackerelio/mackerel-client-go v0.40.0/go.mod h1:hIMlFC/wuvBBQEjh0plBLUUTT/bcjmiwoPMxTucVFYk=
 github.com/nasa9084/go-switchbot/v5 v5.3.0 h1:IbWmape0ah8ngdzlNW6u47UZvcQxP31v6sMSVuEU7f0=
 github.com/nasa9084/go-switchbot/v5 v5.3.0/go.mod h1:o2hvx2sq92j8oaHrl5JYrWkxSAiXVCCEEIqmvqxqZus=
 github.com/samber/lo v1.52.0 h1:Rvi+3BFHES3A8meP33VPAxiBZX/Aws5RxrschYGjomw=
