@@ -2,7 +2,7 @@ module github.com/SlashNephy/mackerel-plugin-switchbot
 
 go 1.24.0
 
-toolchain go1.25.7
+toolchain go1.26.0
 
 require (
 	github.com/jessevdk/go-flags v1.6.1
