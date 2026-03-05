@@ -16,8 +16,8 @@ github.com/mackerelio/mackerel-client-go v0.40.0 h1:PYjQg5WSzDqZUlasOQuMaUfS0JcN
 github.com/mackerelio/mackerel-client-go v0.40.0/go.mod h1:hIMlFC/wuvBBQEjh0plBLUUTT/bcjmiwoPMxTucVFYk=
 github.com/nasa9084/go-switchbot/v5 v5.3.0 h1:IbWmape0ah8ngdzlNW6u47UZvcQxP31v6sMSVuEU7f0=
 github.com/nasa9084/go-switchbot/v5 v5.3.0/go.mod h1:o2hvx2sq92j8oaHrl5JYrWkxSAiXVCCEEIqmvqxqZus=
-github.com/samber/lo v1.52.0 h1:Rvi+3BFHES3A8meP33VPAxiBZX/Aws5RxrschYGjomw=
-github.com/samber/lo v1.52.0/go.mod h1:4+MXEGsJzbKGaUEQFKBq2xtfuznW9oz/WrgyzMzRoM0=
+github.com/samber/lo v1.53.0 h1:t975lj2py4kJPQ6haz1QMgtId2gtmfktACxIXArw3HM=
+github.com/samber/lo v1.53.0/go.mod h1:4+MXEGsJzbKGaUEQFKBq2xtfuznW9oz/WrgyzMzRoM0=
 golang.org/x/sync v0.19.0 h1:vV+1eWNmZ5geRlYjzm2adRgW2/mcpevXNg50YZtPCE4=
 golang.org/x/sync v0.19.0/go.mod h1:9KTHXmSnoGruLpwFjVSX0lNNA75CykiMECbovNTZqGI=
 golang.org/x/sys v0.25.0 h1:r+8e+loiHxRqhXVl6ML1nO3l1+oFoWbnlu2Ehimmi34=
